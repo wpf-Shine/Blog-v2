@@ -1,0 +1,53 @@
+<div class="footer">
+    <p>Copyright 2021 <a href="#">www.tp5blog.com</a> All Rights Reserved</p>
+</div>
+
+<script src="/static/index/js/jquery-3.3.1.min.js"></script>
+<script src="/static/index/js/bootstrap.min.js"></script>
+<script src="/static/lib/layer/layer.js"></script>
+<script src="/static/index/js/swiper-bundle.min.js"></script>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+      spaceBetween: 30,
+      centeredSlides: true,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  </script>
+
+<script>
+    $(function () {
+        $('#loginout').click(function () {
+            layer.confirm('确定退出吗？', {
+                title:'退出登录',
+                icon:3
+                }, function(index){
+                    layer.close(index);
+                    $.ajax({
+                    url:"{:url('index/index/loginout')}",
+                    type:'post',
+                    dataType:'json',
+                    success:function () {
+                        layer.msg('退出成功！', {
+                            icon:6,
+                            time:2000
+                        }, function () {
+                            location.href = location.href;
+                        });
+                    }
+                });
+            }); 
+            return false;
+        });
+    });
+</script>

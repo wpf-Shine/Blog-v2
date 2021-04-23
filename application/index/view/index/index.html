@@ -1,0 +1,62 @@
+{include file="public/_head" /}
+<style>
+    body {
+         background-image:url(/static/index/img/1.jpg);
+        background-size:100% 100%;
+        background-repeat:no-repeat;
+    }
+</style>
+<div class="container">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                  <div class="swiper-slide"><img src="/static/index/img/L2.png" alt=""></div>
+                  <div class="swiper-slide"><img src="/static/index/img/L1.jpg" alt=""></div>
+                  <div class="swiper-slide"><img src="/static/index/img/2.jpg" alt=""></div>
+            </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+                <!-- Add Arrows -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+          </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-8">
+            <div class="page-header h3">{$catename|default="文章"}列表</div>
+            <div class="article-list">
+                {volist name="articles" id="vo"}
+                <div class="article-list-item">
+                    <a href="{:url('index/article/article', ['id' => $vo.id])}" class="title">{$vo.title}</a>
+                    <div class="info">
+                        <span class="author">作者：{$vo.author}</span>-
+                        <span class="time">发布时间：{$vo.create_time}</span>-
+                        <span class="read">阅读：{$vo.click}</span>-
+                        <span class="comment">评论：{$vo.comment}</span>
+                    </div>
+                </div>
+                {/volist}
+            </div>
+            <nav class="">
+                {$articles->render()|raw}
+            </nav>
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <div class="page-header h3">推荐文章</div>
+            <div class="topic-list">
+                {volist name="topArticles" id="vo"}
+                <div class="topic-list-item">
+                    <a href="{:url('index/article/article', ['id' => $vo.id])}" class="title">{$vo.title}</a>
+                </div>
+                {/volist}
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4" style="float: right; margin-bottom: 10px">
+            <div class="page-header h3">联系博主</div>
+            <div class="topic-list">
+                <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=1596989740&site=qq&menu=yes"><img border="0" src="/static/index/img/ico_qq.png" alt="点击这里给我发消息" title="点击这里给我发消息"/></a>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="public/_foot" /}
+</body>
+</html>
