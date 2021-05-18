@@ -29,8 +29,10 @@ class Comment extends Controller
     public function commentDel()
     {
         $commentInfo = model('Comment')->find(input('post.id'));
+        $articleInfo = model('Article')->find($commentInfo['articleid']);
         $result = $commentInfo->delete();
         if ($result) {
+            $articleInfo->setDec('comment');
             $this->success('删除成功！', 'admin/comment/commentlist');
         }else {
             $this->error('删除失败！');

@@ -11,35 +11,34 @@
     <link rel="stylesheet" href="/static/index/css/index.css" />
 
     <style>
-    .swiper-container {
-      width: 100%;
-      height: 450px;
-
-    }
-
-    .swiper-slide {
-      text-align: center;
-      font-size: 18px;
-      /*background: #fff;*/
-
-      /* Center slide text vertically */
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-box-pack: center;
-      -ms-flex-pack: center;
-      -webkit-justify-content: center;
-      justify-content: center;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
-      -webkit-align-items: center;
-      align-items: center;
-    }
-    .swiper-slide img {
+      .swiper-container {
         width: 100%;
-        height: 100%;
-    }
+        height: 450px;
+      }
+
+      .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        /*background: #fff;*/
+
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+      }
+      .swiper-slide img {
+          width: 100%;
+          height: 100%;
+      }
   </style>
 </head>
 <body>
@@ -62,7 +61,19 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {if session('?index.id')}
-                <li><a href="{:url('index/article/articlemember')}">{:session('index.nickname')}</a></li>
+                <!-- <li><a href="{:url('index/article/articlemember')}">{:session('index.nickname')}</a></li> -->
+
+                <li role="presentation" class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    {:session('index.nickname')} <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href="{:url('index/index/editpwd',['id' => session('index.id')])}">修改个人信息</a>
+                    </li>
+                  </ul>
+                </li>
+
                 <li><a href="#" id="loginout">退出</a></li>
                 {else /}
                 <li><a href="{:url('index/index/login')}">登录</a></li>
@@ -71,10 +82,10 @@
             </ul>
             <form action="{:url('index/article/articlesearch')}" class="navbar-form navbar-right" method="post">
                 <div class="form-group">
-                    <input type="text" class="form-control input-sm" id="search" name="keyword" placeholder="仅支持标题搜索" />
+                    <input type="text" class="form-control input-sm " id="search" name="keyword" placeholder ="{$topSearch.title}" style="width: 220px" />
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-default btn-sm" id="btn-search">搜索</button>
+                    <button class="btn btn-default btn-sm " id="btn-search">搜索</button>
                 </div>
             </form>
         </div>

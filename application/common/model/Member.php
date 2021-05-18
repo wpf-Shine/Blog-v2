@@ -14,6 +14,12 @@ class Member extends Model
         'email'
     ];
 
+    //关联评论
+    public function comments()
+    {
+        return $this->hasMany('Comment', 'memberid', 'id');
+    }
+
     public function article()
     {
         return $this->hasMany('Article', 'articleid', 'id');

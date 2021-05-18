@@ -33,7 +33,7 @@ class Index extends Base
             ];
             $result = model('Member')->login($data);
             if ($result == 1) {
-                $this->success('登录成功！');
+                $this->success('登录成功！','index/index/index');
             }else {
                 $this->error($result);
             }
@@ -59,6 +59,31 @@ class Index extends Base
             }
         }
         return view();
+    } 
+
+    public function editpwd()
+    {
+        if (request()->isAjax()) {
+            $data = [
+                'id' => input('post.id'),
+                'oldpass' => input('post.oldpass'),
+                'newpass' => input('post.newpass'),
+                'nickname' => input('post.nickname')
+            ];
+            $result = model('Member')->edit($data);
+            if ($result == 1) {
+                session(null);
+                $this->success('修改成功！请重新登录', 'index/index/login');
+            }else {
+                $this->error($result);
+            }
+        }
+        $memberInfo = model('Member')->find(input('id'));
+        $viewData = [
+            'memberInfo' => $memberInfo
+        ];
+        $this->assign($viewData);
+        return view('editpwd');
     }
 
     public function loginout()
@@ -71,4 +96,6 @@ class Index extends Base
     {
         return view();
     }
+
+    
 }

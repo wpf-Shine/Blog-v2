@@ -2,6 +2,8 @@
 
 namespace app\index\controller;
 
+
+
 class Article extends Base
 {
     public function article()
@@ -17,19 +19,15 @@ class Article extends Base
 
     public function articleSearch()
     {
-        if (!input('keyword')) {
-            $this->error('请输入内容！');
-        }else{
-            $keyword = '%' . input('keyword') . '%';
-            $where[] = ['title', 'like', $keyword];
-            $articles = model('Article')->where($where)->paginate(10, false, $where);
-            $viewData = [
-                'articles' => $articles,
-                'catename' => '' . input('keyword') . '' . '搜索结果'
-            ];
-            $this->assign($viewData);
-            return view('index/index');
-        }
+        $keyword = '%' . input('keyword') . '%';
+        $where[] = ['title', 'like', $keyword];
+        $articles = model('Article')->where($where)->paginate(10, false, $where);
+        $viewData = [
+            'articles' => $articles,
+            'catename' => '' . input('keyword') . '' . '搜索结果'
+        ];
+        $this->assign($viewData);
+        return view('index/index');
     }
 
     public function articleMember()
@@ -43,15 +41,17 @@ class Article extends Base
         return view('index/index');
     }
 
-    public function articleComment()
+    public function comm()
     {
         $data = [
-            'content' => input('post.comment'),
-            'articleid' => input('post.articleid'),
-            'memberid' => session('index.id')
+            'articleid' => input('post.article_id'),
+            'memberid' => input('post.member_id'),
+            'content' => input('post.content')
         ];
-        $result = model('Comment')->add($data);
+        $articleInfo = model('Article')->find(input('post.article_id'));
+        $result = model('Comment')->comm($data);
         if ($result == 1) {
+            $articleInfo->setInc('comment');
             $this->success('评论成功！');
         }else {
             $this->error($result);

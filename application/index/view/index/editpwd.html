@@ -1,0 +1,63 @@
+{include file="public/_head" /}
+<div class="container">
+    <div class="content center-block animated fadeInDown">
+        <div class="page-header h1">修改个人信息</div>
+        <form action="#">
+        	<input type="hidden" name="id" value="{$memberInfo.id}">
+            <div class="form-group">
+                <label for="oldpass" class="control-label">原密码</label>
+                <input type="password" class="form-control" id="oldpass" name="oldpass" placeholder="密码" />
+            </div>
+            <div class="form-group">
+                <label for="newpass" class="control-label">新密码</label>
+                <input type="password" class="form-control" id="newpass" name="newpass" placeholder="密码" />
+            </div>
+            <div class="form-group">
+                <label for="nickname" class="control-label">昵称</label>
+                <input type="text" class="form-control" id="nickname" name="nickname" placeholder="昵称" value="{$memberInfo.nickname}" />
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-block" type="submit" id="pwdEdit">修改</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="/static/index/js/jquery-3.3.1.min.js"></script>
+<script src="/static/index/js/bootstrap.min.js"></script>
+<script src="/static/lib/layer/layer.js"></script>
+{include file="public/_foot" /}
+<script>
+    $(".footer").addClass("navbar-fixed-bottom");
+    $(function () {
+        $('#pwdEdit').click(function () {
+            $.ajax({
+                url:"{:url('index/index/editpwd')}",
+                type:'post',
+                data:$('form').serialize(),
+                dataType:'json',
+                success:function (data) {
+                    if (data.code == 1) {
+                        layer.msg(data.msg, {
+                            icon:6,
+                            time:2000
+                        }, function () {
+                            location.href = data.url;
+                        });
+                    }else {
+                        layer.open({
+                            title:'修改失败',
+                            content:data.msg,
+                            icon:5,
+                            anim:6
+                        });
+                    }
+                }
+            });
+            return false;
+        });
+    });
+</script>
+
+</body>
+</html>

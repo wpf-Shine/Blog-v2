@@ -76,8 +76,8 @@ class Member extends Base
 
     public function memberDel()
     {
-        $memberInfo = model('Member')->find(input('post.id'));
-        $result = $memberInfo->delete();
+        $memberInfo = model('Member')->with('comments')->find(input('post.id'));
+        $result = $memberInfo->together('comments')->delete();
         if ($result) {
             $this->success('操作成功！', 'admin/member/memberlist');
         }else {

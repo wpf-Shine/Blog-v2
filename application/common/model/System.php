@@ -16,7 +16,7 @@ class System extends Model
             return $validate->getError();
         }
         $webInfo = $this->find($data['id']);
-        $webInfo->webename = $data['webname'];
+        $webInfo->webname = $data['webname'];
         $webInfo->shortname = $data['shortname'];
         $webInfo->copyright = $data['copyright'];
         $result = $webInfo->save();

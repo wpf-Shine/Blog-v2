@@ -1,12 +1,4 @@
 <?php
-/**
- * Created by DreamPHP.
- * User: Leruge
- * Date: 2018/4/3 0003
- * Time: 23:12
- * Email: leruge@163.com
- * Url: http://www.dreamphp.com.cn/
- */
 return [
     'codeSet'  => '1234567890',
     // 验证码字符集合

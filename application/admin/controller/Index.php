@@ -22,7 +22,7 @@ class Index extends Controller
             }
         }
         if (session('?admin.id')) {
-            $this->redirect('admin/home/index');
+            $this->error('非法登录拦截，请登录！','admin/index/login');
         }
         return view();
     }
@@ -79,7 +79,7 @@ class Index extends Controller
             $result = $adminInfo->save();
             $content = '您好，' . $adminInfo['nickname'] . '！<br>' . '您的密码已重置成功。<br>' .
                 '用户名：' . $adminInfo['username'] . '<br>' . '新密码：' . $newpass;
-            if ($result && email($adminInfo['email'], $adminInfo['nickname'], '密码重置成功--梦中程序员', $content)) {
+            if ($result && email($adminInfo['email'], $adminInfo['nickname'], '密码重置成功--W的个人小站', $content)) {
                 $this->success('新密码已发往邮箱！', 'admin/index/login');
             }else {
                 $this->error('密码重置失败！');

@@ -22,7 +22,7 @@ function email($mailto, $nickname, $subject, $content)
         $mail->Host = 'smtp.163.com';  // Specify main and backup SMTP servers
         $mail->SMTPAuth = true;                               // Enable SMTP authentication
         $mail->Username = 'weipengfei_zyhb@163.com';                 // SMTP username
-        $mail->Password = 'JMFYMIWWCLNHDKLW';                           // SMTP password
+        $mail->Password = 'JJOEZNYOKGXABNRO';                           // SMTP password
         $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
         $mail->Port = 465;                                    // TCP port to connect to
         $mail->CharSet = 'utf-8';

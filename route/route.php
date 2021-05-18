@@ -16,7 +16,8 @@ Route::rule('login', 'index/index/login', 'get|post');
 Route::rule('loginout', 'index/index/loginout', 'post');
 Route::rule('register', 'index/index/register', 'get|post');
 Route::rule('my', 'index/article/articlemember', 'get');
-Route::rule('comment', 'index/article/articlecomment', 'post');
+Route::rule('comment', 'index/article/comm', 'post');
+Route::rule('editpwd/[:id]', 'index/index/editpwd', 'get|post');
 Route::miss('index/index/miss');
 
 Route::group('admin', function () {

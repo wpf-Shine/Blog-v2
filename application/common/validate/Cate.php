@@ -1,12 +1,4 @@
 <?php
-/**
- * Created by DreamPHP.
- * User: Leruge
- * Date: 2018/4/4 0004
- * Time: 18:35
- * Email: leruge@163.com
- * Url: http://www.dreamphp.com.cn/
- */
 
 namespace app\common\validate;
 
